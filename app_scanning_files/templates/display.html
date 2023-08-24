@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Upload and Statistics</title>
+</head>
+<body>
+    <h1>File Statistics</h1>
+
+    <h2>File Information</h2>
+    <p>File Type: {{ file_type }}</p>
+    <p>Column Number: {{ column_number }}</p>
+    <p>Data Number: {{ data_number }}</p>
+    <p>NaN Count: {{ nan_count }}</p>
+    <p>Row Number: {{ row_number }}</p>
+
+    <h2>Data Preview</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                {% for column_name in df.columns %}
+                    <th>{{ column_name }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in df.values %}
+                <tr>
+                    {% for value in row %}
+                        <td>{{ value }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
