@@ -9,26 +9,22 @@ def calculate_statistics(df, file_type):
     column_number = len(df.columns)
     # Get column name
     column_names = df.columns.tolist()
-
+    # Get column data type
     data_types = df.dtypes.to_dict()
-
+    # Get column numeric stats
     numeric_stats = df.describe().transpose()
-
+    # Get column unique values
     unique_values = df.nunique()
-
+    # Get column data preview
     data_preview = df.head()
-
+    # Get column correlation matrix
     correlation_matrix = df.corr()
-
     # Get data number (number of rows)
     data_number = len(df)
-
     # Get NaN (missing value) count
     nan_count = df.isna().sum().sum()
-
     # Get row number
     row_number = df.shape[0]
-
     # Return the calculated statistics
     return file_type, column_number, data_number, nan_count, row_number,correlation_matrix,data_preview,unique_values,numeric_stats,data_types,column_names
 
