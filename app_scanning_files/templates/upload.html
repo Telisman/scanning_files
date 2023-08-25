@@ -2,24 +2,109 @@
 <html>
   <head>
     <title>Upload a File</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/upload.css') }}">
+    <!-- Add the Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Add the Bootstrap JavaScript (optional) -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Include your upload.js script -->
+    <script src="{{ url_for('static', filename='js/upload.js') }}"></script>
+</head>
   </head>
   <body>
-    <h1>Upload a File</h1>
-    <form method="POST" enctype="multipart/form-data">
-      <label for="file_type">File Type:</label>
-      <select name="file_type">
-        <option value="csv">CSV</option>
-        <option value="excel">Excel</option>
-        <option value="txt">TXT</option>
-      </select>
-      <br><br>
-      <label for="file">Choose a file:</label>
-      <input type="file" name="file" id="file">
-      <br><br>
-      <label for="delimiter">Delimiter (for TXT files):</label>
-      <input type="text" name="delimiter" id="delimiter">
-      <br><br>
-      <input type="submit" value="Upload">
-    </form>
+    <div class="container-fluid title">
+      <div id="fly-in">
+          <div>Welcome</div>
+          <div>Upload your file<span>.csv , .txt , .exl </span></div>
+          <div>Get data <span> for selected file</span></div>
+        </div>
+    </div>
+   <div class="container-fluid text-center description" >
+        <div class="row">
+          <div class="col">
+            <h2>Description: </h2> <br>
+            <p>The Text File Aggregator is a versatile and efficient tool designed to simplify the process of collecting, organizing, and consolidating text-based information from various sources.<br><br>
+            Whether you have a collection of text files on your computer or a mix of text data copied from different documents,<br>
+            this tool streamlines the task of aggregating them into a single, cohesive report. </p>
+          </div>
+          <div class="col">
+            <h2>File Selection: </h2><br>
+            <p>
+              Give either a list of files from your computer (.csv , .txt, .exl ).<br>
+             <br>
+            </p>
+          </div>
+        </div>
+    </div>
+
+    <div class="container-fluid text-center form">
+        <div class="row">
+          <div class="col">
+            <h2> Additional Information</h2> <br>
+            <p>When faced with the scenario of having multiple tabs, you'll want to seamlessly replicate the following process for each of them. <br>
+              This involves meticulously organizing and naming the files in a manner that aligns with the TSA (Transportation Security Administration) chapter order, ensuring systematic storage and easy access.<br>
+            </p>
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Name of field</th>
+                  <th scope="col">Description of field </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-label="Account">File type</td>
+                  <td data-label="Due Date">Select file type.<br> Make sure that type you select is same that you choose in file button</td>
+                </tr>
+                <tr>
+                  <td scope="row" data-label="Account">Choose file button</td>
+                  <td data-label="Due Date">Select file(.txt, .tsv), for submitting. </td>
+                </tr>
+                <tr>
+                  <td scope="row" data-label="Account">Delimiter </td>
+                  <td data-label="Due Date">A delimiter is a character or set of characters that acts as a boundary or separator between data elements within a text file or document. It is used to organize and parse data into distinct fields, making it easier for software to read and process the information. Common delimiters include commas, tabs, semicolons, and vertical bars, among others. For example, in a CSV file, commas are used as delimiters to separate individual data values into columns. Delimiters play a crucial role in structured data representation and exchange in computing.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="col">
+               <form method="POST" enctype="multipart/form-data">
+                  <label for="file_type">File Type:</label>
+                  <select id="file_type" name="file_type">
+                    <option value="csv">CSV</option>
+                    <option value="excel">Excel</option>
+                    <option value="txt">TXT</option>
+                  </select>
+                  <br><br>
+                  <label for="file">Choose a file:</label>
+                  <input type="file" name="file" id="file">
+                  <br><br>
+                  <label for="delimiter">Delimiter (for TXT files):</label>
+                  <input type="text" name="delimiter" id="delimiter">
+                  <br><br>
+                  <input type="submit" value="Upload">
+                </form>
+           </div>
+        </div>
+    </div>
+
+
+<!--    <form method="POST" enctype="multipart/form-data">-->
+<!--      <label for="file_type">File Type:</label>-->
+<!--      <select id="file_type" name="file_type">-->
+<!--        <option value="csv">CSV</option>-->
+<!--        <option value="excel">Excel</option>-->
+<!--        <option value="txt">TXT</option>-->
+<!--      </select>-->
+<!--      <br><br>-->
+<!--      <label for="file">Choose a file:</label>-->
+<!--      <input type="file" name="file" id="file">-->
+<!--      <br><br>-->
+<!--      <label for="delimiter">Delimiter (for TXT files):</label>-->
+<!--      <input type="text" name="delimiter" id="delimiter">-->
+<!--      <br><br>-->
+<!--      <input type="submit" value="Upload">-->
+<!--    </form>-->
   </body>
 </html>

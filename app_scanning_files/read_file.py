@@ -18,7 +18,7 @@ def calculate_statistics(df, file_type):
     # Get column data preview
     data_preview = df.head()
     # Get column correlation matrix
-    correlation_matrix = df.corr()
+    # correlation_matrix = df.corr()
     # Get data number (number of rows)
     data_number = len(df)
     # Get NaN (missing value) count
@@ -26,7 +26,7 @@ def calculate_statistics(df, file_type):
     # Get row number
     row_number = df.shape[0]
     # Return the calculated statistics
-    return file_type, column_number, data_number, nan_count, row_number,correlation_matrix,data_preview,unique_values,numeric_stats,data_types,column_names
+    return file_type, column_number, data_number, nan_count, row_number,data_preview,unique_values,numeric_stats,data_types,column_names
 
 # HTML form for file upload
 @app.route('/', methods=['GET', 'POST'])
@@ -46,7 +46,7 @@ def upload_file():
             return "Invalid file type. Please choose from CSV, Excel, or TXT."
 
         # Calculate statistics about the DataFrame
-        file_type, column_number, data_number, nan_count, row_number, correlation_matrix, data_preview, unique_values, numeric_stats, data_types, column_names = calculate_statistics(
+        file_type, column_number, data_number, nan_count, row_number, data_preview, unique_values, numeric_stats, data_types, column_names = calculate_statistics(
             df, file_type)
 
         return render_template('display.html',
@@ -59,7 +59,6 @@ def upload_file():
                                numeric_stats=numeric_stats,
                                unique_values=unique_values,
                                data_preview=data_preview,
-                               correlation_matrix=correlation_matrix,
                                df=df)  # Pass the DataFrame to the template
 
     return render_template('upload.html')
