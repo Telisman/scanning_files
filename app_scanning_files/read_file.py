@@ -7,6 +7,18 @@ app = Flask(__name__)
 def calculate_statistics(df, file_type):
     # Get column number
     column_number = len(df.columns)
+    # Get column name
+    column_names = df.columns.tolist()
+
+    data_types = df.dtypes.to_dict()
+
+    numeric_stats = df.describe().transpose()
+
+    unique_values = df.nunique()
+
+    data_preview = df.head()
+
+    correlation_matrix = df.corr()
 
     # Get data number (number of rows)
     data_number = len(df)
@@ -18,7 +30,7 @@ def calculate_statistics(df, file_type):
     row_number = df.shape[0]
 
     # Return the calculated statistics
-    return file_type, column_number, data_number, nan_count, row_number
+    return file_type, column_number, data_number, nan_count, row_number,correlation_matrix,data_preview,unique_values,numeric_stats,data_types,column_names
 
 # HTML form for file upload
 @app.route('/', methods=['GET', 'POST'])
@@ -38,7 +50,8 @@ def upload_file():
             return "Invalid file type. Please choose from CSV, Excel, or TXT."
 
         # Calculate statistics about the DataFrame
-        file_type, column_number, data_number, nan_count, row_number = calculate_statistics(df, file_type)
+        file_type, column_number, data_number, nan_count, row_number, correlation_matrix, data_preview, unique_values, numeric_stats, data_types, column_names = calculate_statistics(
+            df, file_type)
 
         return render_template('display.html',
                                file_type=file_type,
@@ -46,6 +59,11 @@ def upload_file():
                                data_number=data_number,
                                nan_count=nan_count,
                                row_number=row_number,
+                               data_types=data_types,
+                               numeric_stats=numeric_stats,
+                               unique_values=unique_values,
+                               data_preview=data_preview,
+                               correlation_matrix=correlation_matrix,
                                df=df)  # Pass the DataFrame to the template
 
     return render_template('upload.html')

@@ -1,36 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>File Upload and Statistics</title>
+    <meta charset="UTF-8">
+    <title>Data Statistics</title>
 </head>
 <body>
-    <h1>File Statistics</h1>
+    <h1>Data Statistics for {{ file_type }}</h1>
 
-    <h2>File Information</h2>
-    <p>File Type: {{ file_type }}</p>
-    <p>Column Number: {{ column_number }}</p>
-    <p>Data Number: {{ data_number }}</p>
-    <p>NaN Count: {{ nan_count }}</p>
-    <p>Row Number: {{ row_number }}</p>
+    <h2>Basic Information:</h2>
+    <ul>
+        <li>Number of Columns: {{ column_number }}</li>
+        <li>Number of Rows: {{ row_number }}</li>
+        <li>Number of Data Points: {{ data_number }}</li>
+        <li>Number of Missing Values: {{ nan_count }}</li>
+    </ul>
 
-    <h2>Data Preview</h2>
+    <h2>Data Types:</h2>
+    <ul>
+        {% for column_name, data_type in data_types.items() %}
+            <li>{{ column_name }}: {{ data_type }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Summary Statistics for Numeric Columns:</h2>
     <table border="1">
         <thead>
             <tr>
-                {% for column_name in df.columns %}
-                    <th>{{ column_name }}</th>
-                {% endfor %}
+                <th>Column Name</th>
+                <th>Mean</th>
+                <th>Std Dev</th>
+                <th>Min</th>
+                <th>25%</th>
+                <th>50%</th>
+                <th>75%</th>
+                <th>Max</th>
             </tr>
         </thead>
         <tbody>
-            {% for row in df.values %}
+            {% for column_name, stats in numeric_stats.items() %}
                 <tr>
-                    {% for value in row %}
-                        <td>{{ value }}</td>
-                    {% endfor %}
+                    <td>{{ column_name }}</td>
+                    <td>{{ stats['mean'] }}</td>
+                    <td>{{ stats['std'] }}</td>
+                    <td>{{ stats['min'] }}</td>
+                    <td>{{ stats['25%'] }}</td>
+                    <td>{{ stats['50%'] }}</td>
+                    <td>{{ stats['75%'] }}</td>
+                    <td>{{ stats['max'] }}</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+
+    <h2>Unique Values for Non-Numeric Columns:</h2>
+    <ul>
+        {% for column_name, unique_value_count in unique_values.items() %}
+            <li>{{ column_name }}: {{ unique_value_count }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Data Preview:</h2>
+    {{ data_preview.to_html(classes="table table-striped table-bordered table-hover")|safe }}
+
+    <h2>Correlation Matrix:</h2>
+    {{ correlation_matrix.to_html(classes="table table-striped table-bordered table-hover")|safe }}
 </body>
 </html>
