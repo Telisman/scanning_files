@@ -3,65 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <title>Data Statistics</title>
+   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/display.css') }}">
+    <!-- Add the Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Add the Bootstrap JavaScript (optional) -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Include your upload.js script -->
+    <script src="{{ url_for('static', filename='js/display.js') }}"></script>
 </head>
 <body>
-    <h1>Data Statistics for {{ file_type }}</h1>
+<div  class="container-fluid">
+<section class="report-dashboard">
+  <h2 class="report-dashboard-title">Data Statistics for file type: {{ file_type }}</h2>
+  <h2>Basic Information:</h2>
+  <div class="row">
+    <div class="flex-container">
+      <div class="report-dashboard-item">
+        <div class="report-dashboard-label">Number of Columns:</div>
+        <div class="report-dashboard-number">{{ column_number }}</div>
+      </div>
+      <!-- /.report-dashboard-item -->
+      <div class="report-dashboard-item">
+        <div class="report-dashboard-label">Number of Rows:</div>
+        <div class="report-dashboard-number">{{ row_number }}</div>
+      </div>
+      <!-- /.report-dashboard-item -->
+      <div class="report-dashboard-item">
+        <div class="report-dashboard-label">Number of Data Points:</div>
+        <div class="report-dashboard-number"> {{ data_number }}</div>
+      </div>
+      <!-- /.report-dashboard-item -->
+      <div class="report-dashboard-item">
+        <div class="report-dashboard-label">Number of Missing Values: </div>
+        <div class="report-dashboard-number">{{ nan_count }}</div>
+      </div>
+    </div>
+    <!-- /.flex-container -->
+  </div>
+  <!-- /.row -->
+<h2>Data Types:</h2>
+<div class="row">
+  <div class="flex-container">
+    {% for column_name, data_type in data_types.items() %}
+      <div class="report-dashboard-item">
+        <div class="report-dashboard-label">{{ column_name }}</div>
+        <div class="report-dashboard-number"><span class="percentage-unit">{{ data_type }}</span></div>
+      </div>
+      <!-- /.report-dashboard-item -->
+    {% endfor %}
+  </div>
+  <!-- /.flex-container -->
+</div>
 
-    <h2>Basic Information:</h2>
-    <ul>
-        <li>Number of Columns: {{ column_number }}</li>
-        <li>Number of Rows: {{ row_number }}</li>
-        <li>Number of Data Points: {{ data_number }}</li>
-        <li>Number of Missing Values: {{ nan_count }}</li>
-    </ul>
+<h2>Unique Values for Non-Numeric Columns:</h2>
+<div class="row">
+  <div class="flex-container">
+    {% for column_name, unique_value_count in unique_values.items() %}
+      <div class="report-dashboard-item">
+        <div class="report-dashboard-label">{{ column_name }}</div>
+        <div class="report-dashboard-number"><span class="percentage-unit">{{ unique_value_count }}</span></div>
+      </div>
+      <!-- /.report-dashboard-item -->
+    {% endfor %}
+  </div>
+  <!-- /.flex-container -->
+</div>
 
-    <h2>Data Types:</h2>
-    <ul>
-        {% for column_name, data_type in data_types.items() %}
-            <li>{{ column_name }}: {{ data_type }}</li>
-        {% endfor %}
-    </ul>
+ <h2>Data Preview:</h2>
+<!-- Add your data preview HTML here -->
+{{ data_preview.to_html(classes="data-preview")|safe }}
 
-    <h2>Summary Statistics for Numeric Columns:</h2>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Column Name</th>
-                <th>Mean</th>
-                <th>Std Dev</th>
-                <th>Min</th>
-                <th>25%</th>
-                <th>50%</th>
-                <th>75%</th>
-                <th>Max</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for column_name, stats in numeric_stats.items() %}
-                <tr>
-                    <td>{{ column_name }}</td>
-                    <td>{{ stats['mean'] }}</td>
-                    <td>{{ stats['std'] }}</td>
-                    <td>{{ stats['min'] }}</td>
-                    <td>{{ stats['25%'] }}</td>
-                    <td>{{ stats['50%'] }}</td>
-                    <td>{{ stats['75%'] }}</td>
-                    <td>{{ stats['max'] }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+</section>
+<!-- /.report-dashboard -->
 
-    <h2>Unique Values for Non-Numeric Columns:</h2>
-    <ul>
-        {% for column_name, unique_value_count in unique_values.items() %}
-            <li>{{ column_name }}: {{ unique_value_count }}</li>
-        {% endfor %}
-    </ul>
-
-    <h2>Data Preview:</h2>
-    {{ data_preview.to_html(classes="table table-striped table-bordered table-hover")|safe }}
-
-
+  </div>
 </body>
 </html>
