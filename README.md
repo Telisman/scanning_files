@@ -46,13 +46,13 @@ Installation
 
     bashCopy code
 
-    `cd path/to/your/project`
+    `cd path/to/your/project](https://github.com/Telisman/scanning_files.git)`
 
 3.  Run the Flask application:
 
     bashCopy code
 
-    `python main.py`
+    `python read_file.py`
 
 Usage
 -----
