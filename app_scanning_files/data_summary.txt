@@ -1,0 +1,81 @@
+File Type: csv
+Number of Columns: 35
+Number of Rows: 195
+Number of Data Points: 195
+Number of Missing Values: 341
+
+Data Types:
+Country: object
+Density
+(P/Km2): object
+Abbreviation: object
+Agricultural Land( %): object
+Land Area(Km2): object
+Armed Forces size: object
+Birth Rate: float64
+Calling Code: float64
+Capital/Major City: object
+Co2-Emissions: object
+CPI: object
+CPI Change (%): object
+Currency-Code: object
+Fertility Rate: float64
+Forested Area (%): object
+Gasoline Price: object
+GDP: object
+Gross primary education enrollment (%): object
+Gross tertiary education enrollment (%): object
+Infant mortality: float64
+Largest city: object
+Life expectancy: float64
+Maternal mortality ratio: float64
+Minimum wage: object
+Official language: object
+Out of pocket health expenditure: object
+Physicians per thousand: float64
+Population: object
+Population: Labor force participation (%): object
+Tax revenue (%): object
+Total tax rate: object
+Unemployment rate: object
+Urban_population: object
+Latitude: float64
+Longitude: float64
+
+Unique Values for Non-Numeric Columns:
+Country: 195
+Density
+(P/Km2): 137
+Abbreviation: 188
+Agricultural Land( %): 168
+Land Area(Km2): 194
+Armed Forces size: 105
+Birth Rate: 170
+Calling Code: 182
+Capital/Major City: 192
+Co2-Emissions: 184
+CPI: 175
+CPI Change (%): 86
+Currency-Code: 133
+Fertility Rate: 139
+Forested Area (%): 161
+Gasoline Price: 101
+GDP: 193
+Gross primary education enrollment (%): 141
+Gross tertiary education enrollment (%): 171
+Infant mortality: 144
+Largest city: 188
+Life expectancy: 134
+Maternal mortality ratio: 114
+Minimum wage: 114
+Official language: 76
+Out of pocket health expenditure: 160
+Physicians per thousand: 152
+Population: 194
+Population: Labor force participation (%): 145
+Tax revenue (%): 119
+Total tax rate: 156
+Unemployment rate: 164
+Urban_population: 190
+Latitude: 194
+Longitude: 194
